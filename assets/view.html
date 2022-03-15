@@ -1,0 +1,36 @@
+{% extends "challenge.html" %}
+
+{% block description %}
+    {{ challenge.html }}
+
+
+    {% for i in challenge.flagchoose.strip().split('#') %}
+    
+    <input type="checkbox" name="answer" onclick="displayResult(this.value)" value="{{ i }}">{{ i }}<br>
+
+    {% endfor %}
+{% endblock %}
+
+{% block input %}
+    <script>
+    function displayResult(browser) {
+    obj = document.getElementsByName("answer");
+        check_val = [];
+        for(k in obj){
+            if(obj[k].checked)
+                check_val.push(obj[k].value);
+        }
+        //alert(check_val);
+	document.getElementById("challenge-input").value=check_val;
+	check_val = browser;
+    }
+    </script>
+    <input id="challenge-id" class="challenge-id" type="hidden" value="{{ challenge.id }}">
+    <input id="challenge-input" class="challenge-input" type="hidden">
+{% endblock %}
+
+{% block submit %}
+    <button id="challenge-submit" class="challenge-submit" type="submit">
+        Submit
+    </button>
+{% endblock %}
